@@ -2,7 +2,7 @@
 # [PDF based HTML data entry](https://github.com/gstolarov/pdf-form)
 
 ## Introduction
-There is quite a number of times where instead of the project I get handed a PDF file and asked to build a system to collect relevant data. Building a HTML form is not hard, but organizing input elements so it make sense to the end-user, documenting each input element is always a pain. The ideal situation is to collect data directly into PDF, but this is semi-proprietary mechanism, dealing with binary files, ... so much pain.
+There is quite a number of times where instead of the project I get handed a PDF file and asked to build a system to collect relevant data. Building a HTML form is not hard, but organizing input elements so it make sense to the end-user, documenting each input element, training users what to put where... is always a pain. The ideal situation is to collect data directly into PDF, but this is semi-proprietary mechanism, dealing with binary files, ... so much pain.
 
 So I tried to see what options would be available. In a way I want a PDF as a background image with HTML input elements properly positioned on top. This is what got me started on my research:
  - convert PDF to image (SVG) 
