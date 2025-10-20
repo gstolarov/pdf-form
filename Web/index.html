@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" 
+            integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" 
+            crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" 
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" 
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+           crossorigin="anonymous"></script>
+<style type="text/css">
+	.fade:not(.active) {
+		display: none;
+	}
+	.pdf-formfld {
+		margin: 0px;
+		position: absolute;
+		z-index: 3;
+		box-sizing: border-box;
+		line-height: 1em;
+	}
+	.pdf-page input[type="radio"], .pdf-page input[type="checkbox"] {
+		margin-top: 0px !important;
+	}
+	@media print {
+		.invPrint {
+			display: none !important;
+			visibility: hidden !important;
+			position: absolute !important;
+			height: 0px !important;
+			width: 0px !important;
+			overflow: hidden !important;
+		}
+		.fade:not(.active) /* print all tabs */ {
+			display: block !important;
+			opacity: 1 !important;
+		}
+	}
+</style>
+<script type="text/javascript">
+	function InitSvgPage(page) {
+		var url = page.attr('img'), zoom = parseInt(page.attr('zoom') || 100), pid = page.attr('id');
+		page.css({ position: 'relative' });
+		if (zoom > 1) 
+			page.css({ transform: `translate(${(zoom-100)/2}%, ${(zoom-100)/2}%) scale(${zoom/100})` });
+		fetch(url).then(rsp => rsp.text()).then(function (html) {
+			var svg = $(html).filter('svg'), coll = $('fields', svg), flds = $('input', coll);
+			var scl = parseFloat(svg.attr("height")) / parseFloat(svg.attr("width")),
+				cw = parseFloat(coll.attr("width"));
+			if (!scl || !cw) return;
+			$(`<img src="${url}" />`).prependTo(page).add(page)
+				.css({ width: cw + 'px', height: (cw * scl) + 'px' })
+			flds.each(function (i, def) {
+				def = $(def);
+				var el = $(`#${pid}_${def.attr('id')}`, page);
+				if (!el.length) return;
+				['left', 'top', 'width', 'height']
+					.forEach(x => el.css(x, (parseFloat(el[0].style[x] || def.attr(x))) + 'px'))
+				el.addClass('pdf-formfld')
+			});
+		});
+	}
+
+	$(document).ready(function () {
+		$('.pdf-page').each(function (i, el) { InitSvgPage($(el)); })
+	});</script>
+</head>
+
+<body><form>
+	<div>
+	<ul class="nav nav-tabs invPrint" style="padding-left:20px">
+		<li class="nav-item"><a class="nav-link active" data-toggle="tab" data-target="#p1">
+				Page 1</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" data-target="#p2">
+				Page 2</a></li>
+	</ul>
+	<div id="p1" class="pdf-page tab-pane fade active in" role="tabpanel"
+		 aria-labelledby="page1-tab" img="f1040_Page1.svg" zoom=135>
+		<input type="text" id="p1_f1" title="Year Start" />
+		<input type="text" id="p1_f2" title="Year End" />
+		<input type="text" id="p1_f3" title="Year" />
+		<input type="text" id="p1_f4" title="First Name" />
+		<input type="text" id="p1_f5" title="Last Name" />
+		<select id="p1_f13" title="State">
+			<option value="" />
+			<option value="AZ">Arizona</option>
+			<option value="CA">California</option>
+		</select>
+		<input type="number" id="p1_f14" title="Zip" min="10000" max="99999" />
+		<input type="checkbox" id="p1_c1" name="Elect" value='Y' title="You"  />
+		<input type="checkbox" id="p1_c2" name="Elect" value='S' title="Spuse"  />
+		<input type="radio" id="p1_c3" name="FileStat" value='1' title="Single"  />
+		<input type="radio" id="p1_c4" name="FileStat" value='J' title="Married/Join"  />
+		<input type="radio" id="p1_c5" name="FileStat" value='S' title="Married/Separate"  />
+		<input type="radio" id="p1_c6" name="FileStat" value='H' title="Household Head"  />
+		<input type="radio" id="p1_c7" name="FileStat" value='L' title="Surviving Spouse"  />
+	</div>
+	<div id="p2" class="pdf-page tab-pane fade" role="tabpanel"
+		 aria-labelledby="page2-tab" img="f1040_Page2.svg" zoom=135>
+		<input id="p2_c1" type="checkbox" name='OthForms' value='8814'/>
+		<input id="p2_c2" type="checkbox" name='OthForms' value='4972'/>
+		<input id="p2_c3" type="checkbox" name='OthForms' value='OTH'/>
+		<input id="p2_f1" type='text' title="OthFormNo"/>
+		<input id="p2_f2" type='number' title="Tax"/>
+		<input id="p2_f3" type='number' title="AmtFromS2L3"/>
+	</div>
+	</div>
+</form></body>
+</html>
