@@ -10,8 +10,8 @@ So I tried to see what options would be available. In a way I want a PDF as a ba
  - When HTML page is rendered extract field positions from SVG file, find appropriate HTML input elements and position them appropriately.
 
  So the solution contains 2 different projects:
- - Convert PDF to a set of SVGs  HTML 
- - app to render SVG and properly place input elements
+ - Convert PDF to a set of SVGs images with added instruction on input element positioning. 
+ - Sample page to render SVG and properly place input elements
 
 ## PDF to SVG conversion.
 While there is a number of utilities to convert PDF to SVG, I settled on using [InkScape](https://inkscape.org/). You need to download and install 64bit version as a pre-requisite - the app will use following command line to convert:
