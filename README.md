@@ -7,7 +7,7 @@ There is quite a number of times where instead of the project I get handed a PDF
 So I tried to see what options would be available. In a way I want a PDF as a background image with HTML input elements properly positioned on top. This is what got me started on my research:
  - convert PDF to image (SVG) 
  - save PDF input fields as an XML document, preferably inside the same SVG file to keep it together
- - When HTML page is rendered extract field positions from SVG file, find appropriate HTML input elements and position them appropriately.
+ - When HTML page is rendered extract field positions from SVG file, find corresponding HTML input elements and position them appropriately.
 
  So the solution contains 2 different projects:
  - Convert PDF to a set of SVGs images with added instruction on input element positioning. 
