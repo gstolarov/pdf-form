@@ -44,7 +44,8 @@
 </style>
 <script type="text/javascript">
 	function InitSvgPage(page) {
-		var url = page.attr('img'), zoom = parseInt(page.attr('zoom') || 100), pid = page.attr('id');
+		var url = page.attr('img'), pid = page.attr('id'),
+			zoom = parseInt(page.attr('zoom') || 100);
 		page.css({ position: 'relative' });
 		if (zoom > 1) 
 			page.css({ transform: `translate(${(zoom-100)/2}%, ${(zoom-100)/2}%) scale(${zoom/100})` });
