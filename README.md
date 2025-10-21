@@ -111,7 +111,7 @@ Upon page load I use jQuery to initialize each page:
 2. set page zoom/scale
 3. retrieve actual SVG, convert it to DOM using jQuery and find all the svg/metadata/field/input elements.
 4. add SVG as an image to the page container.
-5. For each of the input elements from the SVG find appropriate HTML input element based on id (\${page_id}_\${field_id}) and set it's position/size/class
+5. For each of the input elements from the SVG find appropriate HTML input element based on id (\${page_id}_\${field_id}) and set it's position/size/class, unless it's defined in the element's style already.
 
 
 As an example I use 1040 US tax form PDF file. Please note that SVG files are created in step 1 - **PDF to SVG conversion**. I never change SVG file, since when there is change I likely would receive another PDF and SVG file would need to be regenerated. While all the input elements are added from the SVG file, I only changed some with correct name/type - in real life all the fields would need to be touched. If for some reason the field is not relevant, then just remove/comment-out it from page container.
