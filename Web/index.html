@@ -14,21 +14,26 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
            crossorigin="anonymous"></script>
 <style type="text/css">
-	.fade:not(.active) {
-		display: none;
+	.pdf-page {
+		position: relative;
 	}
-	.pdf-formfld {
+	.pdf-field {
 		margin: 0px;
 		position: absolute;
 		z-index: 3;
 		box-sizing: border-box;
 		line-height: 1em;
+		display:inline-block !important;
 	}
 	.pdf-page input, .pdf-page select {
+		display: none;				/* will be reset - see .pdf-field def. */
 		font-size: 0.75em;
 	}
 	.pdf-page input[type="radio"], .pdf-page input[type="checkbox"] {
 		margin-top: 0px !important;
+	}
+	.fade:not(.active) {
+		display: none;
 	}
 	@media print {
 		.invPrint {
@@ -49,7 +54,6 @@
 	function InitSvgPage(page) {
 		var url = page.attr('img'), pid = page.attr('id'),
 			zoom = parseInt(page.attr('zoom') || 100);
-		page.css({ position: 'relative' });
 		if (zoom > 1) 
 			page.css({ transform: `translate(${(zoom-100)/2}%, ${(zoom-100)/2}%) scale(${zoom/100})` });
 		fetch(url).then(rsp => rsp.text()).then(function (html) {
@@ -65,18 +69,18 @@
 				if (!el.length) return;
 				['left', 'top', 'width', 'height']
 					.forEach(x => el.css(x, (parseFloat(el[0].style[x] || def.attr(x))) + 'px'))
-				el.addClass('pdf-formfld')
+				el.addClass('pdf-field')
 			});
 		});
 	}
 
 	$(document).ready(function () {
 		$('.pdf-page').each(function (i, el) { InitSvgPage($(el)); })
-	});</script>
+	});
+</script>
 </head>
 
 <body><form>
-	<div>
 	<ul class="nav nav-tabs invPrint" style="padding-left:20px">
 		<li class="nav-item"><a class="nav-link active" data-toggle="tab" data-target="#p1">
 				Page 1</a></li>
@@ -85,34 +89,154 @@
 	</ul>
 	<div id="p1" class="pdf-page tab-pane fade active in" role="tabpanel"
 		 aria-labelledby="page1-tab" img="f1040_Page1.svg" zoom=135>
-		<input type="text" id="p1_f1" title="Year Start" />
-		<input type="text" id="p1_f2" title="Year End" />
-		<input type="text" id="p1_f3" title="Year" />
-		<input type="text" id="p1_f4" title="First Name" />
-		<input type="text" id="p1_f5" title="Last Name" />
-		<select id="p1_f13" title="State">
-			<option value="" />
+		<input type="text" id="p1_f1" />
+		<input type="text" id="p1_f2" />
+		<input type="text" id="p1_f3" name="year"/>
+		<input type="text" id="p1_f4" name="firstName"/>
+		<input type="text" id="p1_f5" name="lastName"/>
+		<input type="text" id="p1_f6" />
+		<input type="text" id="p1_f7" />
+		<input type="text" id="p1_f8" />
+		<input type="text" id="p1_f9" />
+		<input type="text" id="p1_f10" />
+		<input type="text" id="p1_f11" />
+		<input type="text" id="p1_f12" />
+		<select id="p1_f13">
+			<option></option>
 			<option value="AZ">Arizona</option>
 			<option value="CA">California</option>
 		</select>
-		<input type="number" id="p1_f14" title="Zip" min="10000" max="99999" />
-		<input type="checkbox" id="p1_c1" name="Elect" value='Y' title="You"  />
-		<input type="checkbox" id="p1_c2" name="Elect" value='S' title="Spuse"  />
-		<input type="radio" id="p1_c3" name="FileStat" value='1' title="Single"  />
-		<input type="radio" id="p1_c4" name="FileStat" value='J' title="Married/Join"  />
-		<input type="radio" id="p1_c5" name="FileStat" value='S' title="Married/Separate"  />
-		<input type="radio" id="p1_c6" name="FileStat" value='H' title="Household Head"  />
-		<input type="radio" id="p1_c7" name="FileStat" value='L' title="Surviving Spouse"  />
+		<input type="text" id="p1_f14" />
+		<input type="text" id="p1_f15" />
+		<input type="text" id="p1_f16" />
+		<input type="text" id="p1_f17" />
+		<input type="checkbox" id="p1_c1" name='PresElect' value='Selft'/>
+		<input type="checkbox" id="p1_c2" name='PresElect' value='Spouse'/>
+		<input type="radio" id="p1_c3" name='FilingStat' value='Single'/>
+		<input type="radio" id="p1_c6" name='FilingStat' value='Head'/>
+		<input type="radio" id="p1_c4" name='FilingStat' value='MarriedJoint'/>
+		<input type="radio" id="p1_c5" name='FilingStat' value='MarriedSep'/>
+		<input type="radio" id="p1_c7" name='FilingStat' value='SurvSpouse'/>
+		<input type="text" id="p1_f18" />
+		<input type="checkbox" id="p1_c8" />
+		<input type="text" id="p1_f19" />
+		<input type="checkbox" id="p1_c9" />
+		<input type="checkbox" id="p1_c10" />
+		<input type="checkbox" id="p1_c11" />
+		<input type="checkbox" id="p1_c12" />
+		<input type="checkbox" id="p1_c13" />
+		<input type="checkbox" id="p1_c14" />
+		<input type="checkbox" id="p1_c15" />
+		<input type="checkbox" id="p1_c16" />
+		<input type="checkbox" id="p1_c17" />
+		<input type="text" id="p1_f20" />
+		<input type="text" id="p1_f21" />
+		<input type="text" id="p1_f22" />
+		<input type="checkbox" id="p1_c19" />
+		<input type="checkbox" id="p1_c20" />
+		<input type="text" id="p1_f23" />
+		<input type="text" id="p1_f24" />
+		<input type="text" id="p1_f25" />
+		<input type="checkbox" id="p1_c21" />
+		<input type="checkbox" id="p1_c22" />
+		<input type="text" id="p1_f26" />
+		<input type="text" id="p1_f27" />
+		<input type="text" id="p1_f28" />
+		<input type="checkbox" id="p1_c23" />
+		<input type="checkbox" id="p1_c24" />
+		<input type="text" id="p1_f29" />
+		<input type="text" id="p1_f30" />
+		<input type="text" id="p1_f31" />
+		<input type="checkbox" id="p1_c18" />
+		<input type="checkbox" id="p1_c25" />
+		<input type="checkbox" id="p1_c26" />
+		<input type="text" id="p1_f32" />
+		<input type="text" id="p1_f33" />
+		<input type="text" id="p1_f34" />
+		<input type="text" id="p1_f35" />
+		<input type="text" id="p1_f36" />
+		<input type="text" id="p1_f37" />
+		<input type="text" id="p1_f38" />
+		<input type="text" id="p1_f39" />
+		<input type="text" id="p1_f40" />
+		<input type="text" id="p1_f41" />
+		<input type="text" id="p1_f42" />
+		<input type="text" id="p1_f43" />
+		<input type="text" id="p1_f44" />
+		<input type="text" id="p1_f45" />
+		<input type="text" id="p1_f46" />
+		<input type="text" id="p1_f47" />
+		<input type="text" id="p1_f48" />
+		<input type="text" id="p1_f49" />
+		<input type="text" id="p1_f50" />
+		<input type="text" id="p1_f51" />
+		<input type="checkbox" id="p1_c27" />
+		<input type="text" id="p1_f52" />
+		<input type="checkbox" id="p1_c28" />
+		<input type="text" id="p1_f53" />
+		<input type="text" id="p1_f54" />
+		<input type="text" id="p1_f55" />
+		<input type="text" id="p1_f56" />
+		<input type="text" id="p1_f57" />
+		<input type="text" id="p1_f58" />
+		<input type="text" id="p1_f59" />
+		<input type="text" id="p1_f60" />
 	</div>
 	<div id="p2" class="pdf-page tab-pane fade" role="tabpanel"
 		 aria-labelledby="page2-tab" img="f1040_Page2.svg" zoom=135>
-		<input id="p2_c1" type="checkbox" name='OthForms' value='8814'/>
-		<input id="p2_c2" type="checkbox" name='OthForms' value='4972'/>
-		<input id="p2_c3" type="checkbox" name='OthForms' value='OTH'/>
-		<input id="p2_f1" type='text' title="OthFormNo"/>
-		<input id="p2_f2" type='number' title="Tax"/>
-		<input id="p2_f3" type='number' title="AmtFromS2L3"/>
-	</div>
+		<input type="checkbox" id="p2_c1"  />
+		<input type="checkbox" id="p2_c2"  />
+		<input type="checkbox" id="p2_c3"  />
+		<input type="text" id="p2_f1"  />
+		<input type="text" id="p2_f2"  />
+		<input type="text" id="p2_f3"  />
+		<input type="text" id="p2_f4"  />
+		<input type="text" id="p2_f5"  />
+		<input type="text" id="p2_f6"  />
+		<input type="text" id="p2_f7"  />
+		<input type="text" id="p2_f8"  />
+		<input type="text" id="p2_f9"  />
+		<input type="text" id="p2_f10"  />
+		<input type="text" id="p2_f11"  />
+		<input type="text" id="p2_f12"  />
+		<input type="text" id="p2_f13"  />
+		<input type="text" id="p2_f14"  />
+		<input type="text" id="p2_f15"  />
+		<input type="text" id="p2_f16"  />
+		<input type="text" id="p2_f17"  />
+		<input type="text" id="p2_f18"  />
+		<input type="text" id="p2_f19"  />
+		<input type="text" id="p2_f20"  />
+		<input type="text" id="p2_f21"  />
+		<input type="text" id="p2_f22"  />
+		<input type="text" id="p2_f23"  />
+		<input type="text" id="p2_f24"  />
+		<input type="checkbox" id="p2_c4"  />
+		<input type="text" id="p2_f25"  />
+		<input type="checkbox" id="p2_c5"  />
+		<input type="checkbox" id="p2_c6"  />
+		<input type="text" id="p2_f26"  />
+		<input type="text" id="p2_f27"  />
+		<input type="text" id="p2_f28"  />
+		<input type="text" id="p2_f29"  />
+		<input type="checkbox" id="p2_c7"  />
+		<input type="checkbox" id="p2_c8"  />
+		<input type="text" id="p2_f30"  />
+		<input type="text" id="p2_f31"  />
+		<input type="text" id="p2_f32"  />
+		<input type="text" id="p2_f33"  />
+		<input type="text" id="p2_f34"  />
+		<input type="text" id="p2_f35"  />
+		<input type="text" id="p2_f36"  />
+		<input type="text" id="p2_f37"  />
+		<input type="text" id="p2_f38"  />
+		<input type="text" id="p2_f39"  />
+		<input type="text" id="p2_f40"  />
+		<input type="checkbox" id="p2_c9"  />
+		<input type="text" id="p2_f41"  />
+		<input type="text" id="p2_f42"  />
+		<input type="text" id="p2_f43"  />
+		<input type="text" id="p2_f44"  />
 	</div>
 </form></body>
 </html>
