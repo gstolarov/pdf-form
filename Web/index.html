@@ -58,7 +58,7 @@
 			page.css({ transform: `translate(${(zoom-100)/2}%, ${(zoom-100)/2}%) scale(${zoom/100})` });
 		fetch(url).then(rsp => rsp.text()).then(function (html) {
 			var svg = $(html.replaceAll('svg:', '')).filter('svg'),
-				coll = $('fields', svg), flds = $('field', coll);
+				coll = $('fields', svg), flds = $('input', coll);
 			var scl = parseFloat(svg.attr("height")) / parseFloat(svg.attr("width")),
 				cw = parseFloat(coll.attr("width"));
 			if (!scl || !cw) return;
@@ -242,3 +242,4 @@
 </form></body>
 
 </html>
+
