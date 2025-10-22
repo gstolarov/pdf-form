@@ -25,7 +25,7 @@ Apparently SVG specs provide an element **svg/metadata** which is actually ignor
 To run conversion process, run the utility, select PDF file and click on PDF->SVG button. If everything is OK, in the same folder as PDF file, it will create ${fileName}_PageXXX.svg files.
 
 ## HTML presentation
-The second project is **Web**. All the logic is in the **index.html** file. The only 2 dependencies are the bootstrap to quickly draw tab control and jQuery. Both are included from CDN. 
+The second project is **Web**. All the logic is in the **[index.html](https://gstolarov.github.io/pdf-form/Web/index.html)** file. Please keep in mind that this is only concept project and your implementation may vary based on the framework you use. The only 2 dependencies are the bootstrap to quickly draw tab control and jQuery. Both are included from CDN. 
 
 #### CSS classes:
 First let's define couple of CSS classes:
