@@ -1,5 +1,6 @@
 
 
+
 # [PDF based HTML data entry](https://github.com/gstolarov/pdf-form)
 
 ## Introduction
@@ -114,6 +115,6 @@ Upon page load I use jQuery to initialize each page:
 5. For each of the input elements from the SVG find appropriate HTML input element based on id (\${page_id}_\${field_id}) and set it's position/size/class, unless it's defined in the element's style already.
 
 
-As an example I use 1040 US tax form PDF file. Please note that SVG files are created in step 1 - **PDF to SVG conversion**. I never change SVG file, since when there is change I likely would receive another PDF and SVG file would need to be regenerated. While all the input elements are added from the SVG file, I only changed some with correct name/type - in real life all the fields would need to be touched. If for some reason the field is not relevant, then just remove/comment-out it from page container.
+As an example I use 1040 US tax form PDF file ([live test](https://gstolarov.github.io/pdf-form/Web/index.html)). Please note that SVG files are created in step 1 - **PDF to SVG conversion**. I never change SVG file, since when there is change I likely would receive another PDF and SVG file would need to be regenerated. While all the input elements are added from the SVG file, I only changed some with correct name/type - in real life all the fields would need to be touched. If for some reason the field is not relevant, then just remove/comment-out it from page container.
 In real life, you would also need to provide bi-directional binding and validation, but this is framework dependent and outside of the scope of the project. In my projects each field also have additional attribute specifying a binding information but like I said this depends on the framework information and would vary between Angular, React, ...
 
